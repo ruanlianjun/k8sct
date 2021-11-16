@@ -1,6 +1,7 @@
 package informer
 
 import (
+	"github.com/ruanlianjun/k8s-operate/common"
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/dynamic/dynamicinformer"
 	"time"
@@ -8,7 +9,7 @@ import (
 
 type Cli struct {
 	informer dynamicinformer.DynamicSharedInformerFactory
-	Controller *QueueController
+	controller *QueueController
 }
 
 func NewInformerCli(client dynamic.Interface, defaultResyncPeriod time.Duration,maxRetries int, namespace string) *Cli {
@@ -19,9 +20,14 @@ func NewInformerCli(client dynamic.Interface, defaultResyncPeriod time.Duration,
 	queue:=LimitQueue()
 	queueController := NewController(informerFactory, queue, maxRetries)
 
-	return &Cli{informer: informerFactory,Controller: queueController}
+	return &Cli{informer: informerFactory,controller: queueController}
 }
 
-func (c *Cli) Run()  {
-	
+func (c *Cli) AddEventHandler(resourceType common.ResourceType, addFunc, updateFunc, DeleteFunc *HandleFunc) *Cli {
+	c.controller = c.controller.AddEventHandler(resourceType,addFunc,updateFunc,DeleteFunc)
+	return c
+}
+
+func (c *Cli) Run(workerNum int, stopCh chan struct{}) error {
+	return c.controller.Run(workerNum,stopCh)
 }

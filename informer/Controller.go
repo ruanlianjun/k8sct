@@ -3,6 +3,7 @@ package informer
 import (
 	"errors"
 	"fmt"
+	"github.com/ruanlianjun/k8s-operate/common"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/util/runtime"
 	"k8s.io/apimachinery/pkg/util/wait"
@@ -48,17 +49,18 @@ func NewController(factory dynamicinformer.DynamicSharedInformerFactory, queue w
 }
 
 // AddEventHandler 资源，比如 "configmaps.v1.", "deployments.v1.apps", "rabbits.v1.stable.wbsnail.com"
-func (c *QueueController) AddEventHandler(resourceType string, addFunc, updateFunc, DeleteFunc *HandleFunc) *QueueController {
-	resource, groupResource := schema.ParseResourceArg(resourceType)
+func (c *QueueController) AddEventHandler(resourceType common.ResourceType, addFunc, updateFunc, DeleteFunc *HandleFunc) *QueueController {
+	
+	resource, groupResource := schema.ParseResourceArg(resourceType.String())
 	log.Printf("resourceType:%s groupResource:%s\n", resource, groupResource)
 	if resource == nil {
 		panic("parse resource type err")
 	}
 
-	c.liters[resourceType] = c.factory.ForResource(*resource).Lister()
+	c.liters[resourceType.String()] = c.factory.ForResource(*resource).Lister()
 
 	informer := c.factory.ForResource(*resource).Informer()
-	c.informers[resourceType] = informer
+	c.informers[resourceType.String()] = informer
 
 	informer.AddEventHandler(cache.ResourceEventHandlerFuncs{
 		AddFunc: func(obj interface{}) {
