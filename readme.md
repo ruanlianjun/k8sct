@@ -15,8 +15,9 @@ import (
 func TestInformer(t *testing.T) {
 	//NewController()
 	stopChan:=make(chan struct{})
+	//defaultResyncPeriod update可能sync信息 maxRetries处理失败后最大重试次数
 	dyInformer:=NewInformerCli(DyK8sCli(),0,10,"default")
-	err:=dyInformer.Controller.AddEventHandler(common.ResourceKindDeployment,WarpHandleFunc(func(rawData interface{}) error {
+	err:=dyInformer.AddEventHandler(common.ResourceKindConfigMap,WarpHandleFunc(func(rawData interface{}) error {
 		fmt.Printf("----------->addFunc:%+v\n",rawData)
 		return nil
 	}),WarpHandleFunc(func(rawData interface{}) error {
@@ -30,7 +31,7 @@ func TestInformer(t *testing.T) {
 	}),WarpHandleFunc(func(rawData interface{}) error {
 		fmt.Printf("----------->deleteFunc:%+v\n",rawData)
 		return nil
-	})).Run(10,stopChan)//最大处理数据10的协程
+	})).Run(10,stopChan)//最大10个协程处理数据
 	log.Println("informer:",err)
 }
 
