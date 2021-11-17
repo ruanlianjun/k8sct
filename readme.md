@@ -5,7 +5,7 @@ package informer
 
 import (
 	"fmt"
-	"github.com/ruanlianjun/k8s-operate/common"
+	"github.com/ruanlianjun/k8sct/common"
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/tools/clientcmd"
 	"log"
@@ -13,7 +13,6 @@ import (
 )
 
 func TestInformer(t *testing.T) {
-	//NewController()
 	stopChan:=make(chan struct{})
 	//defaultResyncPeriod update可能sync信息 maxRetries处理失败后最大重试次数
 	dyInformer:=NewInformerCli(DyK8sCli(),0,10,"default")
