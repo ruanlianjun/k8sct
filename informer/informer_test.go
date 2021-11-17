@@ -10,7 +10,6 @@ import (
 )
 
 func TestInformer(t *testing.T) {
-	//NewController()
 	stopChan:=make(chan struct{})
 	//defaultResyncPeriod update可能sync信息 maxRetries处理失败后最大重试次数
 	dyInformer:=NewInformerCli(DyK8sCli(),0,10,"default")
