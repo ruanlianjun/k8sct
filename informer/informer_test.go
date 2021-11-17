@@ -2,7 +2,7 @@ package informer
 
 import (
 	"fmt"
-	"github.com/ruanlianjun/k8s-operate/common"
+	"github.com/ruanlianjun/k8sct/common"
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/tools/clientcmd"
 	"log"

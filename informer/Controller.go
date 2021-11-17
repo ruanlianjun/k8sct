@@ -3,7 +3,7 @@ package informer
 import (
 	"errors"
 	"fmt"
-	"github.com/ruanlianjun/k8s-operate/common"
+	"github.com/ruanlianjun/k8sct/common"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/util/runtime"
 	"k8s.io/apimachinery/pkg/util/wait"
@@ -50,7 +50,7 @@ func NewController(factory dynamicinformer.DynamicSharedInformerFactory, queue w
 
 // AddEventHandler 资源，比如 "configmaps.v1.", "deployments.v1.apps", "rabbits.v1.stable.wbsnail.com"
 func (c *QueueController) AddEventHandler(resourceType common.ResourceType, addFunc, updateFunc, DeleteFunc *HandleFunc) *QueueController {
-	
+
 	resource, groupResource := schema.ParseResourceArg(resourceType.String())
 	log.Printf("resourceType:%s groupResource:%s\n", resource, groupResource)
 	if resource == nil {

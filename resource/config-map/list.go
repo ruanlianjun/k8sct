@@ -2,7 +2,7 @@ package config_map
 
 import (
 	"context"
-	"github.com/ruanlianjun/k8s-operate/common"
+	"github.com/ruanlianjun/k8sct/common"
 	v1 "k8s.io/api/core/v1"
 	k8sClient "k8s.io/client-go/kubernetes"
 )

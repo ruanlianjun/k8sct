@@ -1,7 +1,7 @@
 package informer
 
 import (
-	"github.com/ruanlianjun/k8s-operate/common"
+	"github.com/ruanlianjun/k8sct/common"
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/dynamic/dynamicinformer"
 	"time"

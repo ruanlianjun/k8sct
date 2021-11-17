@@ -1,4 +1,4 @@
-module github.com/ruanlianjun/k8s-operate
+module github.com/ruanlianjun/k8sct
 
 go 1.17
 

@@ -2,7 +2,7 @@ package deployment
 
 import (
 	"context"
-	"github.com/ruanlianjun/k8s-operate/common"
+	"github.com/ruanlianjun/k8sct/common"
 	"k8s.io/api/apps/v1"
 	k8sClient "k8s.io/client-go/kubernetes"
 )
