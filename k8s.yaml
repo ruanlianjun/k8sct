@@ -1,14 +1,20 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Plu
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name:
+  name:"aaa"
   labels:
-    app:
+    app: "abb"
 spec:
-  containers:
-    - name:
-      image:
-      imagePullPolicy: IfNotPresent
-  restartPolicy: Always
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - abb
 
-eventTime:
+  template:
+    spec:
+      containers:
+        - name: nginx
+
+

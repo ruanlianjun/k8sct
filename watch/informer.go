@@ -1,4 +1,4 @@
-package informer
+package watch
 
 import (
 	"github.com/ruanlianjun/k8sct/common"

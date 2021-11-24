@@ -1,4 +1,4 @@
-package informer
+package watch
 
 import (
 	"errors"

@@ -1,4 +1,4 @@
-package informer
+package watch
 
 import (
 	"k8s.io/client-go/util/workqueue"
