@@ -16,10 +16,10 @@ func (r ResourceType) String() string {
 }
 
 const (
-	ResourceKindConfigMap                ResourceType =              "configmaps.v1."
-	ResourceKindDaemonSet                ResourceType =   "daemonsets.v1.apps"
+	ResourceKindConfigMap                ResourceType = "configmaps.v1."
+	ResourceKindDaemonSet                ResourceType = "daemonsets.v1.apps"
 	ResourceKindDeployment               ResourceType = "deployments.v1.apps"
-	ResourceKindEvent                    ResourceType = "events.v1.events.k8s.io"
+	ResourceKindEvent                    ResourceType = "events.v1."
 	ResourceKindHorizontalPodAutoScaler  ResourceType = "horizontalpodautoscalers.v1.autoscaling"
 	ResourceKindIngress                  ResourceType = "ingresses.v1.networking.k8s.io"
 	ResourceKindJob                      ResourceType = "jobs.v1.batch"

@@ -16,7 +16,7 @@ func NewInformerCli(client dynamic.Interface, defaultResyncPeriod time.Duration,
 
 	informerFactory := dynamicinformer.NewFilteredDynamicSharedInformerFactory(
 		client, defaultResyncPeriod, namespace, nil)
-
+	
 	queue:=LimitQueue()
 	queueController := NewController(informerFactory, queue, maxRetries)
 

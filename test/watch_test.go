@@ -13,8 +13,8 @@ import (
 func TestWatch(t *testing.T) {
 	stopChan:=make(chan struct{})
 	//defaultResyncPeriod update可能sync信息 maxRetries处理失败后最大重试次数
-	dyInformer:=watch.NewInformerCli(DyK8sCli(),0,10,"default")
-	err:=dyInformer.AddEventHandler(common.ResourceKindConfigMap,watch.WarpHandleFunc(func(rawData interface{}) error {
+	dyInformer:=watch.NewInformerCli(DyK8sCli(),0,10,"ai-devel")
+	err:=dyInformer.AddEventHandler(common.ResourceKindEvent,watch.WarpHandleFunc(func(rawData interface{}) error {
 		fmt.Printf("----------->addFunc:%+v\n",rawData)
 		return nil
 	}),watch.WarpHandleFunc(func(rawData interface{}) error {
@@ -33,7 +33,7 @@ func TestWatch(t *testing.T) {
 }
 
 func DyK8sCli() dynamic.Interface {
-	config, err := clientcmd.BuildConfigFromFlags("", "/Users/ruanlianjun/.kube/config")
+	config, err := clientcmd.BuildConfigFromFlags("", "/Users/ruanlianjun/Desktop/hw_config")
 
 	if err != nil {
 		panic(err)

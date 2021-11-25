@@ -56,7 +56,7 @@ func (c *QueueController) AddEventHandler(resourceType common.ResourceType, addF
 	if resource == nil {
 		panic("parse resource type err")
 	}
-
+	
 	c.liters[resourceType.String()] = c.factory.ForResource(*resource).Lister()
 
 	informer := c.factory.ForResource(*resource).Informer()
