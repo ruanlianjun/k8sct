@@ -82,8 +82,7 @@ func (c *QueueController) AddEventHandler(resourceType common.ResourceType, addF
 
 func (c *QueueController) Run(workerNum int, stopChan chan struct{}) error {
 	defer runtime.HandleCrash()
-	defer c.queue.ShuttingDown()
-
+	defer c.queue.ShutDown()
 	log.Println("start consume queue")
 	go c.factory.Start(stopChan)
 
@@ -114,7 +113,7 @@ func (c *QueueController) runWorker() {
 
 func (c *QueueController) processNextItem() bool {
 	obj, shutdown := c.queue.Get()
-	if shutdown {
+	if shutdown {//如果队列已经关闭直接返回false
 		return false
 	}
 	c.wg.Add(1)
